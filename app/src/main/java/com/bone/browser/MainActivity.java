@@ -12,7 +12,7 @@ import android.widget.SearchView;
 
 public class MainActivity extends Activity {
     private WebView webView;
-    private SearchView searchView;
+    private SearchView searchView,urlbar;
     private ImageView bookmark, addnewtab, menu;
     private String currentUrl = "https://www.google.com";
 
@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 
         webView = findViewById(R.id.webView);
         searchView = findViewById(R.id.searchbar);
+        urlbar = findViewById(R.id.urlbar);
         bookmark = findViewById(R.id.bookmark);
         addnewtab = findViewById(R.id.addnewtab);
         menu = findViewById(R.id.menu);
@@ -48,6 +49,18 @@ public class MainActivity extends Activity {
             }
         });
 
+        urlbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                performSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
